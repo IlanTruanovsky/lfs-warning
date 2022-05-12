@@ -142,6 +142,7 @@ async function getOrCreateLfsWarningLabel(
     });
   } catch (error) {
     if (error instanceof Error) {
+      console.log("If you're reading this that means there was an error in getting labels (not likely, hopefully)")
       if (error.message === 'Not Found') {
         await octokit.rest.issues.createLabel({
           ...repo,
@@ -164,7 +165,7 @@ async function getPrFilesWithBlobSize(pullRequestNumber: number) {
     ...repo,
     pull_number: pullRequestNumber,
   });
-
+  console.log("getPrFilesWithBlobSize: " + data.toString())
   const exclusionPatterns = core.getMultilineInput('exclusionPatterns');
 
   const files =
@@ -172,7 +173,7 @@ async function getPrFilesWithBlobSize(pullRequestNumber: number) {
       ? data.filter(({filename}) => {
           const isExcluded = micromatch.isMatch(filename, exclusionPatterns);
           if (isExcluded) {
-            core.info(`${filename} has been excluded from LFS warning`);
+            core.info(`${filename} has been excluded   from LFS warning`);
           }
           return !isExcluded;
         })
@@ -194,6 +195,7 @@ async function getPrFilesWithBlobSize(pullRequestNumber: number) {
       };
     })
   );
+  console.log("prFilesWithBlobSize: " + prFilesWithBlobSize.toString())
   return prFilesWithBlobSize;
 }
 
