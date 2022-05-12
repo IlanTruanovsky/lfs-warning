@@ -12,7 +12,7 @@ const event_type = context.eventName;
 
 async function run() {
   const fsl = getFileSizeLimitBytes();
-
+  core.info("This message was also added by me")
   core.info(`Default configured filesizelimit is set to ${fsl} bytes...`);
   core.info(
     `Name of Repository is ${repo.repo} and the owner is ${repo.owner}`
