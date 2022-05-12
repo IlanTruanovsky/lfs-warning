@@ -10440,6 +10440,7 @@ async function run() {
     const labelName = core.getInput('labelName');
     const labelColor = core.getInput('labelColor');
     await getOrCreateLfsWarningLabel(labelName, labelColor);
+    console.log("I got warning label")
     if (event_type === 'pull_request') {
         const pullRequestNumber = (_a = context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.number;
         if (pullRequestNumber === undefined) {
@@ -10447,6 +10448,7 @@ async function run() {
         }
         core.info(`The PR number is: ${pullRequestNumber}`);
         const prFilesWithBlobSize = await getPrFilesWithBlobSize(pullRequestNumber);
+        console.log("I got prFilesWithBlobSize")
         core.debug(`prFilesWithBlobSize: ${JSON.stringify(prFilesWithBlobSize)}`);
         const largeFiles = [];
         const accidentallyCheckedInLsfFiles = [];
@@ -10535,6 +10537,7 @@ async function getOrCreateLfsWarningLabel(labelName, labelColor) {
     catch (error) {
         if (error instanceof Error) {
             if (error.message === 'Not Found') {
+                console.log("ERROR: " + error)
                 await octokit.rest.issues.createLabel({
                     ...repo,
                     name: labelName,
