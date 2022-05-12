@@ -10565,6 +10565,7 @@ async function getPrFilesWithBlobSize(pullRequestNumber) {
             return !isExcluded;
         })
         : data;
+    console.log("Files: " + files.toString())
     const prFilesWithBlobSize = await Promise.all(files.map(async (file) => {
         const { filename, sha, patch } = file;
         const { data: blob } = await octokit.rest.git.getBlob({
@@ -10578,6 +10579,7 @@ async function getPrFilesWithBlobSize(pullRequestNumber) {
             patch,
         };
     }));
+    console.log("prFilesWithBlobSize: " + prFilesWithBlobSize.toString())
     return prFilesWithBlobSize;
 }
 function getCommentBody(largeFiles, accidentallyCheckedInLsfFiles, fsl) {
