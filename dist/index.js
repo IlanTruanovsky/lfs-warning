@@ -10436,6 +10436,7 @@ async function run() {
     core.info(`Default configured filesizelimit is set to ${fsl} bytes...`);
     core.info(`Name of Repository is ${repo.repo} and the owner is ${repo.owner}`);
     core.info(`Triggered event is ${event_type}`);
+    core.info("I added some stuff, maybe this works")
     const labelName = core.getInput('labelName');
     const labelColor = core.getInput('labelColor');
     await getOrCreateLfsWarningLabel(labelName, labelColor);
