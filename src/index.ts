@@ -18,7 +18,7 @@ async function run() {
     `Name of Repository is ${repo.repo} and the owner is ${repo.owner}`
   );
   core.info(`Triggered event is ${event_type}`);
-
+  core.info("This messages was addede by me")
   const labelName = core.getInput('labelName');
   const labelColor = core.getInput('labelColor');
 
