@@ -10571,11 +10571,12 @@ async function getPrFilesWithBlobSize(pullRequestNumber) {
     console.log("Files: " + files.toString())
     const prFilesWithBlobSize = await Promise.all(files.map(async (file) => {
         const { filename, sha, patch } = file;
-        console.log("One file is:",filename,sha,patch)
+        console.log("One file is:","\n",filename,"\n",sha,"\n",patch)
         const { data: blob } = await octokit.rest.git.getBlob({
             ...repo,
             file_sha: sha,
         });
+        console.log("Done file naming")
         return {
             filename,
             filesha: sha,
